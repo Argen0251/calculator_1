@@ -9,10 +9,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.calculator_.databinding.ActivityMainBinding;
 import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
-
+    private ActivityMainBinding binding;
     private Double first, second;
     private String operation;
     private TextView textView;
@@ -21,37 +22,38 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        textView = findViewById(R.id.text_view);
+
         isOperationClick = false;
     }
 
     public void onNumberClick(View view) {
         String text = ((MaterialButton) view).getText().toString();
-        String currentText = textView.getText().toString();
+        String currentText = binding.textView.getText().toString();
 
         if (text.equals("AC")) {
-            textView.setText("0");
+            binding.textView.setText("0");
             first = null;
             second = null;
             operation = null;
         } else if (currentText.equals("0") || isOperationClick) {
-            textView.setText(text);
+            binding.textView.setText(text);
         }
         else {
-            textView.append(text);
+            binding.textView.append(text);
         }
 
         isOperationClick = false;
     }
 
     public void Operation_click(View view) {
-        String currentText = textView.getText().toString();
+        String currentText = binding.textView.getText().toString();
 
         if (view.getId() == R.id.plus) {
             first = Double.valueOf(currentText);
@@ -69,16 +71,16 @@ public class MainActivity extends AppCompatActivity {
             // Исправленная обработка процента
             if (!currentText.equals("0")) {
                 double value = Double.parseDouble(currentText) / 100;
-                textView.setText(formatResult(value));
+                binding.textView.setText(formatResult(value));
                 isOperationClick = true;
             }
             return;
         } else if (view.getId() == R.id.minus_plus) {
             if (!currentText.equals("0")) {
                 if (currentText.startsWith("-")) {
-                    textView.setText(currentText.substring(1));
+                    binding.textView.setText(currentText.substring(1));
                 } else {
-                    textView.setText("-" + currentText);
+                    binding.textView.setText("-" + currentText);
                 }
             }
         }
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
             second = Double.valueOf(currentText);
             Double result = calculate(first, second, operation);
-            textView.setText(formatResult(result));
+            binding.textView.setText(formatResult(result));
             first = result;  // Сохранение результата для дальнейших операций
         }
         isOperationClick = true;
