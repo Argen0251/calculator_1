@@ -1,5 +1,6 @@
 package com.example.calculator_;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -31,7 +32,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         isOperationClick = false;
+        binding.sampleButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(intent);
+        });
+
+
+
+
     }
+
+
 
     public void onNumberClick(View view) {
         String text = ((MaterialButton) view).getText().toString();
@@ -68,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             first = Double.valueOf(currentText);
             operation = "/";
         } else if (view.getId() == R.id.procent) {
-            // Исправленная обработка процента
             if (!currentText.equals("0")) {
                 double value = Double.parseDouble(currentText) / 100;
                 binding.textView.setText(formatResult(value));
@@ -83,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     binding.textView.setText("-" + currentText);
                 }
             }
+                binding.sampleButton.setVisibility(View.VISIBLE);
+
         }
         else if (view.getId() == R.id.ravno) {
             if (first == null || operation == null) {
@@ -91,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             second = Double.valueOf(currentText);
             Double result = calculate(first, second, operation);
             binding.textView.setText(formatResult(result));
-            first = result;  // Сохранение результата для дальнейших операций
+            first = result;
         }
         isOperationClick = true;
     }
