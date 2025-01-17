@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         isOperationClick = false;
         binding.sampleButton.setOnClickListener(v -> {
+            String result = binding.textView.getText().toString();
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            intent.putExtra("RESULT", result);
             startActivity(intent);
         });
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public void onNumberClick(View view) {
         String text = ((MaterialButton) view).getText().toString();
         String currentText = binding.textView.getText().toString();
-
+        binding.sampleButton.setVisibility(View.INVISIBLE);
         if (text.equals("AC")) {
             binding.textView.setText("0");
             first = null;
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             operation = null;
         } else if (currentText.equals("0") || isOperationClick) {
             binding.textView.setText(text);
+        }
+        else if (text.equals(".") && currentText.contains(".")) {
+            return;
         }
         else {
             binding.textView.append(text);
@@ -65,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Operation_click(View view) {
         String currentText = binding.textView.getText().toString();
-
+        binding.sampleButton.setVisibility(View.INVISIBLE);
         if (view.getId() == R.id.plus) {
             first = Double.valueOf(currentText);
             operation = "+";
@@ -93,10 +98,9 @@ public class MainActivity extends AppCompatActivity {
                     binding.textView.setText("-" + currentText);
                 }
             }
-                binding.sampleButton.setVisibility(View.VISIBLE);
-
         }
         else if (view.getId() == R.id.ravno) {
+            binding.sampleButton.setVisibility(View.VISIBLE);
             if (first == null || operation == null) {
                 return;
             }
