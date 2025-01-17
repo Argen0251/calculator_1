@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         isOperationClick = false;
+
+
         binding.sampleButton.setOnClickListener(v -> {
             String result = binding.textView.getText().toString();
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
