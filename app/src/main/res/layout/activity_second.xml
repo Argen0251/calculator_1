@@ -189,19 +189,19 @@
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/price"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        app:labelBehavior="withinBounds"
         android:valueFrom="0"
-        android:valueTo="100"
-        android:stepSize="1"
+        android:valueTo="10000"
+        app:values="@array/initial_slider_values"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:trackColorActive="@color/b_blue"
         app:trackColorInactive="@color/white"
-        app:thumbRadius="10dp"
-        app:trackHeight="6dp"
-        android:thumbTint="@color/b_blue"
+        app:thumbTint="@color/red"
+        app:haloColor="@color/blue"
         app:layout_constraintTop_toBottomOf="@id/nextButton"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_width="170dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -215,20 +215,19 @@
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/accessibility"
-        android:layout_marginTop="30dp"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        app:labelBehavior="withinBounds"
         android:valueFrom="0"
-        android:valueTo="10"
-        android:stepSize="1"
+        android:valueTo="10000"
+        app:values="@array/initial_slider_values"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:trackColorActive="@color/b_blue"
         app:trackColorInactive="@color/white"
-        app:thumbRadius="10dp"
-        app:trackHeight="6dp"
-        android:thumbTint="@color/b_blue"
+        app:thumbTint="@color/red"
+        app:haloColor="@color/blue"
         app:layout_constraintTop_toBottomOf="@id/price"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        android:layout_height="wrap_content"
+        android:layout_width="170dp"/>
 
 
 

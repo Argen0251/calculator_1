@@ -29,6 +29,7 @@ public class SecondActivity extends AppCompatActivity {
     String[] categories = {"one", "two", "three", "other"};
 
     private RangeSlider priceSlider;
+
     private RangeSlider accessibilitySlider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,10 @@ public class SecondActivity extends AppCompatActivity {
             ref.isFavorite = !ref.isFavorite;
         });
 
-        priceSlider = binding.price;
-        accessibilitySlider = binding.accessibility;
-
+        RangeSlider slider = findViewById(R.id.price);
+        RangeSlider slider2 = findViewById(R.id.accessibility);
+        slider.setValues(3000f,6000f);
+        slider.setValues(2000f,3500f);
     }
 
 
